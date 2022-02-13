@@ -21,6 +21,16 @@ console.log(inputlink);
     })
    
 })
+app.get("/daksh", (req, res)=>{
+
+    youtube.getInfo("https://www.youtube.com/watch?v=jD7FnbI76Hg").then((data)=>{
+      
+        res.json(data)
+
+
+    }) 
+
+})
 
 app.listen(PORT, () => {console.log("sever is live"); })
 
