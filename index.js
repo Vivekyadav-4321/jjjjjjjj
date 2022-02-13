@@ -11,15 +11,20 @@ app.get("/", (req, res) => {
 
 app.post("/inputlink",(req, res)=>{
 
- const inputlink = req.body.link
-console.log(inputlink); 
+ var inputlink = req.body.link
+ var check = youtube.validateURL(inputlink)
+  if(check){
     youtube.getInfo(inputlink).then((data)=>{
         const thumbnail =  data.player_response.videoDetails.thumbnail.thumbnails[2].url
         const videolink = data.player_response.streamingData.formats[1].url
 
         res.send(`<center><img src=\"${thumbnail}\"></center><br><br><center><a href=\"${videolink}\">Download This Video </a></center><br><center><a href="/">Download More Videos</a></center>`)
     })
-   
+  }
+   else
+   {
+       res.send(`<center><p>You have enterd an invalid link. Please <a href="/">try again</a></p></center>       `)
+   }
 })
 app.get("/daksh", (req, res)=>{
 
